@@ -1,347 +1,343 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Resultados en Tiempo Real - EcoAir</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-/* Reset básico */
+    <meta charset="UTF-8" />
+    <title>Resultados en Tiempo Real - EcoAir</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+        /* ... tu CSS ... */
+        /* Reset básico */
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  background-color: #F1EFEC;
-  color: #123458;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: row;
-  line-height: 1.6;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #F1EFEC;
+    color: #123458;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    line-height: 1.6;
 }
 
 /* Sidebar */
 .sidebar {
-  width: 250px;
-  background-color: #123458;
-  color: #F1EFEC;
-  padding-top: 20px;
-  position: fixed;
-  height: 100vh;
-  overflow-y: auto;
-  box-shadow: 3px 0 10px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
+    width: 250px;
+    background-color: #123458;
+    color: #F1EFEC;
+    padding-top: 20px;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
 .sidebar h2 {
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
 }
 
 .sidebar a {
-  display: block;
-  color: #F1EFEC;
-  padding: 16px 24px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  transition: background-color 0.3s, transform 0.3s;
+    display: block;
+    color: #F1EFEC;
+    padding: 16px 24px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 .sidebar a:hover,
 .sidebar a:focus {
-  background-color: #27548A;
-  transform: translateX(6px);
-  outline: none;
+    background-color: #27548A;
+    transform: translateX(6px);
+    outline: none;
 }
 
 /* Main content */
 .main-content {
-  margin-left: 250px;
-  padding: 40px 50px;
-  flex-grow: 1;
-  max-width: 1000px;
-  margin-top: 40px;
-  margin-bottom: 80px;
-  box-sizing: border-box;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(18, 52, 88, 0.1);
+    margin-left: 250px;
+    padding: 40px 50px;
+    flex-grow: 1;
+    max-width: 1000px;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(18, 52, 88, 0.1);
 }
 
 /* Título */
 h2 {
-  text-align: center;
-  font-size: 2.8rem;
-  margin-bottom: 40px;
-  color: #123458;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    color: #123458;
+    font-weight: 700;
+    letter-spacing: 0.05em;
 }
 
 /* Gráfico */
 canvas#grafico {
-  max-width: 100%;
-  width: 100%;
-  height: 500px;
-  display: block;
-  margin: 0 auto 40px auto;
-  border-radius: 20px;
-  background: #fff;
-  box-shadow: 0 10px 25px rgba(18, 52, 88, 0.15);
-  padding: 30px;
-  transition: height 0.3s ease;
+    max-width: 100%;
+    width: 100%;
+    height: 500px;
+    display: block;
+    margin: 0 auto 40px auto;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 10px 25px rgba(18, 52, 88, 0.15);
+    padding: 30px;
+    transition: height 0.3s ease;
 }
 
 /* Conclusión debajo del gráfico */
 .conclusion {
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: #27548A;
-  color: #F1EFEC;
-  padding: 25px 35px;
-  border-radius: 15px;
-  font-size: 1.15rem;
-  line-height: 1.5;
-  box-shadow: 0 8px 20px rgba(18, 52, 88, 0.2);
-  text-align: center;
-  font-weight: 500;
-  user-select: none;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #27548A;
+    color: #F1EFEC;
+    padding: 25px 35px;
+    border-radius: 15px;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    box-shadow: 0 8px 20px rgba(18, 52, 88, 0.2);
+    text-align: center;
+    font-weight: 500;
+    user-select: none;
 }
 
 /* Footer */
 footer {
-  background-color: #123458;
-  color: white;
-  text-align: center;
-  padding: 15px 0;
-  position: fixed;
-  bottom: 0;
-  left: 250px;
-  right: 0;
-  font-size: 0.9em;
-  box-sizing: border-box;
-  user-select: none;
+    background-color: #123458;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    left: 250px;
+    right: 0;
+    font-size: 0.9em;
+    box-sizing: border-box;
+    user-select: none;
 }
 
 /* Responsividad */
 
 /* Tablets y pantallas medianas */
 @media (max-width: 1024px) {
-  .main-content {
-    max-width: 90%;
-    margin-left: 250px;
-    padding: 30px 40px;
-  }
-  canvas#grafico {
-    height: 450px;
-  }
+    .main-content {
+        max-width: 90%;
+        margin-left: 250px;
+        padding: 30px 40px;
+    }
+    canvas#grafico {
+        height: 450px;
+    }
 }
 
 /* Móviles y pantallas pequeñas */
 @media (max-width: 768px) {
-  body {
-    flex-direction: column;
-  }
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    padding-bottom: 10px;
-    box-shadow: none;
-  }
-  .main-content {
-    margin-left: 0;
-    padding: 25px 20px;
-    max-width: 100%;
-    margin-top: 20px;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  canvas#grafico {
-    height: 350px;
-    padding: 20px;
-  }
-  footer {
-    left: 0;
-    position: relative;
-  }
-  .conclusion {
-    padding: 20px 25px;
-    font-size: 1rem;
-    max-width: 100%;
-    border-radius: 0;
-    box-shadow: none;
-  }
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding-bottom: 10px;
+        box-shadow: none;
+    }
+    .main-content {
+        margin-left: 0;
+        padding: 25px 20px;
+        max-width: 100%;
+        margin-top: 20px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    canvas#grafico {
+        height: 350px;
+        padding: 20px;
+    }
+    footer {
+        left: 0;
+        position: relative;
+    }
+    .conclusion {
+        padding: 20px 25px;
+        font-size: 1rem;
+        max-width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
 }
 
 /* Pantallas muy pequeñas */
 @media (max-width: 480px) {
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 25px;
-  }
-  canvas#grafico {
-    height: 300px;
-    padding: 15px;
-  }
-  .sidebar a {
-    padding: 12px 15px;
-    font-size: 1rem;
-  }
-  .conclusion {
-    font-size: 0.9rem;
-    padding: 15px 20px;
-  }
-  .main-content {
-    padding: 15px 10px;
-  }
-  /* Ajustes específicos para conclusión en pantallas muy pequeñas */
-  .conclusion {
-    background-color: #123458;
-    color: #F1EFEC;
-    padding: 30px;
-    border-radius: 20px;
-    margin-top: 40px;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    text-align: center;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    transition: all 0.3s ease-in-out;
-  }
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 25px;
+    }
+    canvas#grafico {
+        height: 300px;
+        padding: 15px;
+    }
+    .sidebar a {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+    .conclusion {
+        font-size: 0.9rem;
+        padding: 15px 20px;
+    }
+    .main-content {
+        padding: 15px 10px;
+    }
+    /* Ajustes específicos para conclusión en pantallas muy pequeñas */
+    .conclusion {
+        background-color: #123458;
+        color: #F1EFEC;
+        padding: 30px;
+        border-radius: 20px;
+        margin-top: 40px;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        text-align: center;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        transition: all 0.3s ease-in-out;
+    }
 }
 
 /* Responsive ajustes para la conclusión */
 @media (max-width: 768px) {
-  .conclusion {
-    font-size: 1rem;
-    padding: 20px;
-    margin-top: 30px;
-  }
+    .conclusion {
+        font-size: 1rem;
+        padding: 20px;
+        margin-top: 30px;
+    }
 }
 
 @media (max-width: 480px) {
-  .conclusion {
-    font-size: 0.95rem;
-    padding: 15px;
-  }
+    .conclusion {
+        font-size: 0.95rem;
+        padding: 15px;
+    }
 }
 
-</style>
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>EcoAir Portafolio</h2>
+        <a href="inicio.html">Inicio</a>
+        <a href="resultados.html">Resultados</a>
+        <a href="https://forms.gle/bVBQLDJweYLyMNzQA" target="_blank">Encuesta</a>
+        <a href="#contact">Contacto</a>
+    </div>
 
-<script>
-// Reemplaza esta URL con la URL CSV que publiques desde Google Sheets
-const urlCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQe5OWNNSt8WlIGr5WZNrVwOhusUR5xn-ONt4hYuKCyGrlc4a-HhDY8mCll-UqzyYsdbTXS78NNMaj/pub?output=csv';
+    <div class="main-content">
+        <h2>Resultados de la Encuesta</h2>
+        <canvas id="grafico"></canvas>
 
-fetch(urlCSV)
-  .then(response => response.text())
-  .then(data => {
-    const rows = data.trim().split('\n');
-    const headers = rows[0].split(',');
+        <div class="conclusion">
+            En conclusión, los datos reflejan las condiciones actuales del entorno.
+            Este monitoreo en tiempo real facilita la toma de decisiones informadas
+            y el mantenimiento eficiente del sistema.
+        </div>
+    </div>
 
-    // Asumimos que la columna "¿Cuántos años tienes?" es la que queremos
-    // Buscamos la posición de esa columna (en caso de que cambie)
-    const edadColIndex = headers.findIndex(h => h.includes('años'));
+    <footer>
+        &copy; 2025 EcoAir. Todos los derechos reservados.
+    </footer>
 
-    if (edadColIndex === -1) {
-      alert('No se encontró la columna de edades en el CSV.');
-      return;
-    }
+    <script>
+        const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQe5OWNNSt8WlIGr5WZNrVwOhusUR5xn-ONt4hYuKCyGrlc4a-HhDY8mCll-UqzyYsdbTXS78NNMaj/pub?output=csv";
 
-    // Extraemos las edades de cada fila
-    const edades = rows.slice(1).map(row => {
-      const cols = row.split(',');
-      return cols[edadColIndex].trim();
-    });
+        async function obtenerDatos() {
+            try {
+                const res = await fetch(CSV_URL);
+                if (!res.ok) {
+                    console.error(`Error al cargar el CSV: ${res.status}`);
+                    return null;
+                }
+                const data = await res.text();
+                const filas = data.trim().split("\n").slice(1);
+                const headers = data.trim().split("\n")[0].split(',');
+                const preguntaAnalizar = "¿Cuántos años tienes?"; // Cambia a la pregunta que quieras graficar
+                const indicePregunta = headers.indexOf(preguntaAnalizar);
+                if (indicePregunta === -1) {
+                    console.error(`No se encontró la pregunta: ${preguntaAnalizar}`);
+                    return {};
+                }
 
-    // Contar frecuencia de rangos de edad
-    const conteoEdades = edades.reduce((acc, edad) => {
-      const edadNum = parseInt(edad, 10);
-      if (!isNaN(edadNum)) {
-        if (edadNum < 18) acc['Menos de 18'] = (acc['Menos de 18'] || 0) + 1;
-        else if (edadNum >= 18 && edadNum <= 25) acc['18-25'] = (acc['18-25'] || 0) + 1;
-        else if (edadNum >= 26 && edadNum <= 49) acc['26-49'] = (acc['26-49'] || 0) + 1;
-        else if (edadNum >= 50) acc['50 o más'] = (acc['50 o más'] || 0) + 1;
-      }
-      return acc;
-    }, {});
-
-    // Preparamos datos para el gráfico
-    const labels = Object.keys(conteoEdades);
-    const counts = Object.values(conteoEdades);
-
-    // Crear gráfico con Chart.js
-    const ctx = document.getElementById('grafico').getContext('2d');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Número de Personas',
-          data: counts,
-          backgroundColor: '#27548A',
-          borderColor: '#123458',
-          borderWidth: 1,
-          borderRadius: 8,
-          barPercentage: 0.6
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            enabled: true,
-            mode: 'index',
-            intersect: false
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 1,
-              color: '#123458',
-              font: {
-                size: 14
-              }
-            },
-            grid: {
-              color: '#ddd'
+                const respuestas = {};
+                for (let fila of filas) {
+                    const columnas = fila.split(",");
+                    const respuesta = columnas[indicePregunta]?.trim();
+                    if (respuesta) {
+                        respuestas[respuesta] = (respuestas[respuesta] || 0) + 1;
+                    }
+                }
+                return respuestas;
+            } catch (error) {
+                console.error("Error al obtener los datos:", error);
+                return null;
             }
-          },
-          x: {
-            ticks: {
-              color: '#123458',
-              font: {
-                size: 14
-              }
-            },
-            grid: {
-              display: false
-            }
-          }
         }
-      }
-    });
-  })
-  .catch(error => {
-    console.error('Error al cargar el CSV:', error);
-    alert('Hubo un error al cargar los datos del CSV.');
-  });
-</script>
 
+        async function actualizarGrafico(chart) {
+            const datos = await obtenerDatos();
+            if (datos) {
+                chart.data.labels = Object.keys(datos);
+                chart.data.datasets[0].data = Object.values(datos);
+                chart.update();
+            }
+        }
+
+        async function iniciarGrafico() {
+            const ctx = document.getElementById('grafico').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Respuestas',
+                        data: [],
+                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            precision: 0
+                        }
+                    }
+                }
+            });
+
+            await actualizarGrafico(chart);
+            // Para una actualización en tiempo real (cada 5 segundos):
+            setInterval(() => actualizarGrafico(chart), 5000);
+        }
+
+        iniciarGrafico();
+    </script>
 </body>
 </html>
-
