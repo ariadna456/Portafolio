@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultados en Tiempo Real</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    canvas {
+      max-width: 700px;
+      margin: 30px auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">Resultados de la Encuesta</h2>
+  <canvas id="grafico"></canvas>
+
+  <script>
+    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQe5OWNNSt8WlIGr5WZNrVwOhusUR5xn-ONt4hYuKCyGrlc4a-HhDY8mCll-UqzyYsdbTXS78NNMaj/pub?output=csv";
+
+    async function obtenerDatos() {
+      const res = await fetch(CSV_URL);
+      const data = await res.text();
+      const filas = data.trim().split("\n").slice(1); // Ignora encabezado
+
+      const respuestas = {};
+
+      for (let fila of filas) {
+        const columnas = fila.split(",");
+        const respuesta = columnas[1]?.trim(); // Ajusta el índice si hay más preguntas
+
+        if (respuesta) {
+          respuestas[respuesta] = (respuestas[respuesta] || 0) + 1;
+        }
+      }
+
+      return respuestas;
+    }
+
+    async function actualizarGrafico(chart) {
+      const datos = await obtenerDatos();
+
+      chart.data.labels = Object.keys(datos);
+      chart.data.datasets[0].data = Object.values(datos);
+      chart.update();
+    }
+
+    async function iniciarGrafico() {
+      const ctx = document.getElementById('grafico').getContext('2d');
+      const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: [],
+          datasets: [{
+            label: 'Respuestas',
+            data: [],
+            backgroundColor: 'rgba(75, 192, 192, 0.7)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              precision: 0
+            }
+          }
+        }
+      });
+
+      await actualizarGrafico(chart);
+      setInterval(() => actualizarGrafico(chart), 5000); // Actualiza cada 5 segundos
+    }
+
+    iniciarGrafico();
+  </script>
+</body>
+</html>
