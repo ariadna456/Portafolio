@@ -6,57 +6,60 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    /* Tipografía */
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      background-color: #F1EFEC;
-      color: #123458;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: row;
-    }
+   body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background-color: #F1EFEC;
+  color: #123458;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
 
-    /* Barra lateral */
-    .sidebar {
-      width: 250px;
-      background-color: #123458;
-      color: #F1EFEC;
-      padding-top: 20px;
-      position: fixed;
-      height: 100vh;
-      box-sizing: border-box;
-    }
-    .sidebar h2 {
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 24px;
-    }
-    .sidebar a {
-      display: block;
-      color: #F1EFEC;
-      padding: 16px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-bottom: 10px;
-      transition: background-color 0.3s;
-    }
-    .sidebar a:hover {
-      background-color: #27548A;
-    }
+/* Barra lateral */
+.sidebar {
+  width: 250px;
+  background-color: #123458;
+  color: #F1EFEC;
+  padding-top: 20px;
+  position: fixed;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 24px;
+}
+.sidebar a {
+  display: block;
+  color: #F1EFEC;
+  padding: 16px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+.sidebar a:hover {
+  background-color: #27548A;
+}
 
 .main-content {
   margin-left: 250px;
   padding: 40px 60px;
   flex-grow: 1;
-  max-width: 1000px; /* Limita el ancho máximo para que no se estire demasiado */
-  margin: 40px auto 80px auto; /* Centrado horizontal con margen arriba y abajo */
+  max-width: 1000px;
+  margin-top: 40px;
+  margin-bottom: 80px;
+  margin-left: 250px;
+  box-sizing: border-box;
 }
 
 canvas#grafico {
   max-width: 900px;
   width: 100%;
-  height: 500px; /* Más alto para mejor visibilidad */
+  height: 500px;
   display: block;
   margin: 0 auto 60px auto;
   border-radius: 15px;
@@ -65,51 +68,86 @@ canvas#grafico {
   padding: 25px;
 }
 
-    h2 {
-      text-align: center;
-      font-size: 2em;
-      margin-bottom: 40px;
-      color: #123458;
-    }
+h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 40px;
+  color: #123458;
+}
 
-   
+/* Footer */
+footer {
+  background-color: #123458;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  position: fixed;
+  bottom: 0;
+  left: 250px;
+  right: 0;
+  font-size: 0.9em;
+  box-sizing: border-box;
+}
 
-    /* Footer */
-    footer {
-      background-color: #123458;
-      color: white;
-      text-align: center;
-      padding: 15px 0;
-      position: fixed;
-      bottom: 0;
-      left: 250px;
-      right: 0;
-      font-size: 0.9em;
-    }
+/* Responsive */
+@media (max-width: 1024px) {
+  .main-content {
+    padding: 30px 40px;
+    max-width: 90%;
+    margin-left: 250px;
+  }
+  canvas#grafico {
+    height: 450px;
+  }
+}
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-      }
-      .main-content {
-        margin-left: 0;
-        padding: 20px;
-      }
-      footer {
-        left: 0;
-        position: relative;
-      }
-    }
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+    max-width: 100%;
+  }
+  canvas#grafico {
+    height: 350px;
+    padding: 15px;
+  }
+  footer {
+    left: 0;
+    position: relative;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+  canvas#grafico {
+    height: 300px;
+    padding: 10px;
+  }
+  .main-content {
+    padding: 15px 10px;
+  }
+  .sidebar a {
+    padding: 12px 10px;
+    font-size: 14px;
+  }
+}
+
   </style>
 </head>
 <body>
-
+<center>
   <div class="sidebar">
     <h2>EcoAir Portafolio</h2>
     <a href="inicio.html">Inicio</a>
@@ -188,5 +226,6 @@ canvas#grafico {
 
     iniciarGrafico();
   </script>
+  </center>
 </body>
 </html>
