@@ -1,20 +1,131 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Resultados en Tiempo Real</title>
+  <meta charset="UTF-8" />
+  <title>Resultados en Tiempo Real - EcoAir</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    canvas {
-      max-width: 700px;
-      margin: 30px auto;
+    /* Tipografía */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background-color: #F1EFEC;
+      color: #123458;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+    }
+
+    /* Barra lateral */
+    .sidebar {
+      width: 250px;
+      background-color: #123458;
+      color: #F1EFEC;
+      padding-top: 20px;
+      position: fixed;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 24px;
+    }
+    .sidebar a {
       display: block;
+      color: #F1EFEC;
+      padding: 16px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-bottom: 10px;
+      transition: background-color 0.3s;
+    }
+    .sidebar a:hover {
+      background-color: #27548A;
+    }
+
+.main-content {
+  margin-left: 250px;
+  padding: 40px 60px;
+  flex-grow: 1;
+  max-width: 1000px; /* Limita el ancho máximo para que no se estire demasiado */
+  margin: 40px auto 80px auto; /* Centrado horizontal con margen arriba y abajo */
+}
+
+canvas#grafico {
+  max-width: 900px;
+  width: 100%;
+  height: 500px; /* Más alto para mejor visibilidad */
+  display: block;
+  margin: 0 auto 60px auto;
+  border-radius: 15px;
+  background: white;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  padding: 25px;
+}
+
+    h2 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 40px;
+      color: #123458;
+    }
+
+   
+
+    /* Footer */
+    footer {
+      background-color: #123458;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      position: fixed;
+      bottom: 0;
+      left: 250px;
+      right: 0;
+      font-size: 0.9em;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      footer {
+        left: 0;
+        position: relative;
+      }
     }
   </style>
 </head>
 <body>
-  <h2 style="text-align:center;">Resultados de la Encuesta</h2>
-  <canvas id="grafico"></canvas>
+
+  <div class="sidebar">
+    <h2>EcoAir Portafolio</h2>
+    <a href="inicio.html">Inicio</a>
+    <a href="resultados.html">Resultados</a>
+    <a href="https://forms.gle/bVBQLDJweYLyMNzQA" target="_blank"></a>
+    <a href="#contact"></a>
+  </div>
+
+  <div class="main-content">
+    <h2>Resultados de la Encuesta</h2>
+    <canvas id="grafico"></canvas>
+  </div>
+
+  <footer>
+    &copy; 2025 EcoAir Portafolio
+  </footer>
 
   <script>
     const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQe5OWNNSt8WlIGr5WZNrVwOhusUR5xn-ONt4hYuKCyGrlc4a-HhDY8mCll-UqzyYsdbTXS78NNMaj/pub?output=csv";
@@ -22,13 +133,13 @@
     async function obtenerDatos() {
       const res = await fetch(CSV_URL);
       const data = await res.text();
-      const filas = data.trim().split("\n").slice(1); // Ignora encabezado
+      const filas = data.trim().split("\n").slice(1);
 
       const respuestas = {};
 
       for (let fila of filas) {
         const columnas = fila.split(",");
-        const respuesta = columnas[1]?.trim(); // Ajusta el índice si hay más preguntas
+        const respuesta = columnas[1]?.trim();
 
         if (respuesta) {
           respuestas[respuesta] = (respuestas[respuesta] || 0) + 1;
@@ -72,7 +183,7 @@
       });
 
       await actualizarGrafico(chart);
-      setInterval(() => actualizarGrafico(chart), 5000); // Actualiza cada 5 segundos
+      setInterval(() => actualizarGrafico(chart), 5000);
     }
 
     iniciarGrafico();
