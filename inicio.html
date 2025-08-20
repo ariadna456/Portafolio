@@ -4,305 +4,341 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoAir Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> <!-- Vinculando la tipografía Roboto -->
-    <style>
-        
-  /* Fuentes */
-body {
-    font-family: 'Roboto', sans-serif;
-}
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #F1EFEC;
+    }
 
-/* Barra Lateral */
-.sidebar {
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #123458; /* Color principal */
-    padding-top: 20px;
-    color: white;
-}
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-.sidebar h2 {
-    text-align: center;
-    color: #F1EFEC; /* Color de texto claro */
-    font-size: 24px;
-    margin-bottom: 40px;
-}
+    /* Header Section */
+    .header {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #123458;
+        color: white;
+    }
 
-.sidebar a {
-    display: block;
-    color: #F1EFEC; /* Color claro */
-    padding: 16px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+    .header img.logo {
+        width: 150px;
+        height: 150px;
+        border-radius: 100%;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
 
-.sidebar a:hover {
-    background-color: #27548A; /* Color de fondo cuando el enlace es hover */
-}
+    .header h1 {
+        font-size: 2.5em;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 
-/* Contenido Principal */
-.main-content {
-    margin-left: 250px; /* Deja espacio para la barra lateral */
-    padding: 20px;
-    background-color: #F1EFEC; /* Fondo suave para el contenido */
-}
+    .header p.slogan {
+        font-size: 1.5em;
+        margin: 10px 0;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
 
-header {
-    background-color: #123458; /* Color del encabezado */
-    color: white;
-    padding: 15px;
-    text-align: center;
-}
+    .header .mission-vision {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
 
-h1 {
-    font-size: 2.5em;
-}
+    .header .mission, .header .vision {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+    }
 
-p {
-    font-size: 1.2em;
-    color: #123458; /* Color del texto principal */
-}
+    .header .mission h3, .header .vision h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
 
-/* Estilo de las Secciones */
-.section-title {
-    font-size: 2em;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #123458; /* Título de las secciones con color principal */
-}
-
-.about-me, .projects, .contact {
-    margin-bottom: 40px;
-}
-
-/* Botones Estilo Personalizado */
-.link-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 15px 0;
-    background-color: #27548A; /* Color de fondo de botones */
-    color: white;
-    text-decoration: none;
-    border-radius: 40px; /* Borde redondeado */
-    font-weight: bold;
-    transition: background-color 0.4s;
-    transform: translateY(-30px); /* Efecto de desplazamiento hacia arriba */
-}
-
-.link-btn:hover {
-    background-color: #123458; /* Color de hover para los botones */
-}
-
-/* Contenedor Principal */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #123458; /* Color del pie de página */
-    color: white;
-}
-
-/* ---------------------------- */
-/*      Responsive Design       */
-/* ---------------------------- */
-
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
+    .header img.product {
+        max-width: 300px;
         height: auto;
-        position: relative;
-        padding: 10px 0;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Button Styles */
+    .link-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 15px 0;
+        background-color: #27548A;
+        color: white;
+        text-decoration: none;
+        border-radius: 40px;
+        font-weight: bold;
+        transition: background-color 0.4s;
+    }
+
+    .link-btn:hover {
+        background-color: #123458;
+    }
+
+    /* Promotional Section */
+    .promotional-content {
+        display: flex;
+        flex-direction: column;
+        margin: 40px 0;
         text-align: center;
     }
 
-    .sidebar h2 {
+    .promotional-content.active {
+        display: flex;
+    }
+
+    .promo-banner {
+        background-color: #E6F0FA;
+        padding: 20px;
+        border-radius: 10px;
         margin-bottom: 20px;
-        font-size: 20px;
+        text-align: center;
+        font-size: 1.5em;
+        color: #123458;
     }
 
-    .sidebar a {
-        display: inline-block;
-        margin: 10px 5px;
-        padding: 10px 15px;
-        font-size: 14px;
+    .promo-layout {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
     }
 
-    .main-content {
-        margin-left: 0;
+    .business-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        max-width: 400px;
+    }
+
+    .business-cards img {
+        max-width: 200px;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .promo-img {
+        max-width: 300px;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        max-width: 800px;
+        margin: 0 auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        background-color: #123458;
+    }
+
+    .video-container h3 {
+        color: white;
+        padding: 20px;
+        margin: 0;
+    }
+
+    .video-container p {
+        color: #F1EFEC;
+        padding: 0 20px 20px;
+    }
+
+    /* Section Title */
+    .section-title {
+        font-size: 2em;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #123458;
+    }
+
+    /* Projects Section */
+    .projects {
+        margin-bottom: 40px;
+    }
+
+    .projects .project-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
         padding: 15px;
     }
 
-    header h1 {
-        font-size: 1.8em;
+    .projects .project-card img {
+        width: 100%;
+        border-radius: 8px;
     }
 
-    p, li {
-        font-size: 1em;
+    .projects .project-card p {
+        margin-top: 10px;
+        color: #123458;
+        font-weight: 500;
     }
 
-    .section-title {
-        font-size: 1.5em;
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #123458;
+        color: white;
     }
 
-    /* Ajustar las tarjetas de análisis de mercado */
-    .projects > div {
-        flex-direction: column;
-        align-items: center;
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .header {
+            padding: 20px;
+        }
+
+        .header img.logo {
+            max-width: 150px;
+        }
+
+        .header h1 {
+            font-size: 2em;
+        }
+
+        .header p.slogan {
+            font-size: 1.2em;
+        }
+
+        .header .mission-vision {
+            flex-direction: column;
+        }
+
+        .header img.product {
+            max-width: 200px;
+        }
+
+        .promo-banner {
+            font-size: 1.2em;
+        }
+
+        .promo-layout {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .business-cards {
+            max-width: 100%;
+            grid-template-columns: 1fr;
+        }
+
+        .business-cards img {
+            max-width: 150px;
+        }
+
+        .promo-img {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
+        .video-container {
+            max-width: 100%;
+        }
+
+        .projects .project-card {
+            width: 90%;
+        }
     }
-
-    .projects > div > div {
-        width: 90% !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .link-btn {
-        padding: 8px 16px;
-        font-size: 14px;
-        transform: none;
-    }
-
-    footer p {
-        font-size: 14px;
-    }
-}
-
-
-    </style>
-
+</style>
 </head>
 <body>
-
-<!-- Barra Lateral -->
-<div class="sidebar">
-    <h2 style="text-align:center; color: white;">EcoAir Portfolio</h2>
-    <a href="#about">Sobre EcoAir</a>
-    <a href="#projects">Análisis de Mercado</a>
-    <a href="#survey">Encuesta</a>
-    <a href="#contact">Contacto</a>
-    <a href="#benefits">Beneficios de EcoAir</a>
-    <a href="competencia.html">Análisis de Competencia</a>
-
-</div>
-
-<!-- Contenido Principal -->
-<div class="main-content">
-    <header>
-        <h1>Bienvenido a EcoAir Portfolio</h1>
-        <p>Un vistazo a nuestro proyecto y logros</p>
-    </header>
-
-    <div class="container">
-        <!-- Sobre Mí -->
-        <section id="about" class="about-me">
-            <h2 class="section-title">Sobre nosotros</h2>
-            <p>EcoAir Company es una empresa que te ayuda a gestionar el uso de tus aires acondicionados de forma automática y ecológica. Desde nuestra página web puedes manejar todo sin la necesidad de estar en tu casa.</p></p>
-        </section>
-
-          <!-- Encuesta -->
-        <section id="survey" class="survey">
-            <h2 class="section-title">Encuesta sobre nuestra Página</h2>
-            <p>Me gustaría saber tu opinión sobre nuestro producto. ¡Tu retroalimentación es muy valiosa!</p>
-            <br>
-            <center>
-            <a href="https://forms.gle/bVBQLDJweYLyMNzQA" target="_blank" class="link-btn">Participa en la Encuesta</a>
-            <br>
-
-            <a href="resultado.html" class="link-btn">Ver resultados en tiempo real</a>
-
-
-</center>
-        </section>
-
-
-       <!-- Proyectos -->
-<section id="projects" class="projects">
-    <h2 class="section-title">Análisis de Mercado</h2>
-    <p>Estos son algunos gráficos o resultados de nuestro análisis:</p>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px;">
-        <!-- Tarjeta 1 -->
-        <div style="background: white; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 300px; padding: 15px;">
-            <img src="media/mercado1.png" alt="Gráfico de mercado 1" style="width:100%; border-radius: 8px;">
-            <p style="margin-top: 10px; color: #123458; font-weight: 500;">Encuesta sobre si te gustaría tener nuestro producto.</p>
+    <div class="header">
+        <img src="media/logo1.png" alt="EcoAir Logo" class="logo">
+        <h1>EcoAir Portfolio</h1>
+        <p class="slogan">Automatiza el confort, cuida el planeta</p>
+        <div class="mission-vision">
+            <div class="mission">
+                <h3>Misión</h3>
+                <p>Ofrecer una solución eficiente y escalable al alto consumo de energía en aires acondicionados, y mejorar constantemente el confort de nuestros usuarios adaptando nuestros dispositivos a las diferentes necesidades.</p>
+            </div>
+            <div class="vision">
+                <h3>Visión</h3>
+                <p>Ser líderes globales en el desarrollo de soluciones inteligentes que optimicen el confort ambiental, promoviendo el uso responsable de la energía y contribuyendo activamente a la sostenibilidad del planeta a través de la innovación tecnológica.</p>
+            </div>
         </div>
-
-        <!-- Tarjeta 2 -->
-        <div style="background: white; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 300px; padding: 15px;">
-            <img src="media/mercado2.png" alt="Gráfico de mercado 2" style="width:100%; border-radius: 8px;">
-            <p style="margin-top: 10px; color: #123458; font-weight: 500;">Encuesta sobre los lugares donde usarían nuestro sistema.</p>
-        </div>
-
-        <!-- Tarjeta 3 -->
-        <div style="background: white; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 300px; padding: 15px;">
-            <img src="media/mercado3.png" alt="Gráfico de mercado 3" style="width:100%; border-radius: 8px;">
-            <p style="margin-top: 10px; color: #123458; font-weight: 500;">Encuesta sobre cuánto estarían dispuestos a pagar.</p>
-        </div>
+        <img src="media/product.png" alt="EcoAir Product" class="product">
     </div>
 
-    <ul style="margin-top: 30px;">
-    </ul>
-</section>
+    <div class="container">
+        <div style="text-align: center;">
+            <a href="#" class="link-btn" id="showPromotions">Ver Material Promocional</a>
+            <a href="#projects" class="link-btn">Análisis de Mercado</a>
+            <a href="competencia.html" class="link-btn">Análisis de Competencia</a>
+        </div>
 
-<!-- Conclusión de la Encuesta -->
-<div style="margin-top: 40px; padding: 20px; background-color: white; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    <h3 style="color: #123458; text-align: center; font-size: 1.8em;">Conclusiones de la Encuesta</h3>
-    <p style="color: #123458; font-size: 1.1em; margin-top: 20px;">
-        De acuerdo con los datos recolectados en nuestra encuesta:
-    </p>
-    <ul style="color: #123458; font-size: 1.05em; line-height: 1.8;">
-        <li><strong>68.7%</strong> de los encuestados disponen de uno o más aires acondicionados en su hogar.</li>
-        <li><strong>84.4%</strong> usarían nuestro producto principalmente en el hogar, lo que destaca la comodidad como factor clave.</li>
-        <li><strong>81.3%</strong> manifestaron que sí les gustaría poder controlar su aire acondicionado desde cualquier lugar.</li>
-        <li><strong>90.7%</strong> consideran el ahorro energético como importante o muy importante.</li>
-        <li>Los principales beneficios esperados incluyen: <em>comodidad, automatización, ahorro energético</em> y poder manejar el aire desde cualquier lugar.</li>
-        <li>En cuanto al precio, la mayoría indicó estar dispuesta a pagar entre <strong>20USD y 100USD</strong> por el producto.</li>
-    </ul>
-    <p style="color: #123458; font-size: 1.05em; margin-top: 15px;">
-        Estos resultados refuerzan la viabilidad y el interés por un sistema como EcoAir, orientado a hogares, con control remoto, eficiencia energética y facilidad de uso.
-    </p>
-</div>
+        <div class="promotional-content" id="promoSection">
+            <img src="media/baner.png" alt="EcoAir Banner" class="banner-img">
+            <div class="business-cards">
+                <img src="media/ari.png" alt="Business Card 1">
+                <img src="media/atras.png" alt="Business Card 2">
+                <img src="media/cata.png" alt="Business Card 3">
+                <img src="media/atras.png" alt="Business Card 4">
+            </div>
+            <img src="media/40off.png" alt="40% de Descuento" class="promo-img">
+            <div class="video-container">
+                <h3>Video Publicitario</h3>
+                <p>¡Pronto podrás ver nuestro video promocional aquí!</p>
+            </div>
+        </div>
 
-
-<!-- Beneficios -->
-<section id="benefits" class="benefits">
-    <h2 class="section-title">Beneficios de EcoAir</h2>
-    <ul>
-        <li>✔️ Ahorro energético automatizado</li>
-        <li>✔️ Control desde cualquier lugar</li>
-        <li>✔️ Reducción del impacto ambiental</li>
-        <li>✔️ Registro de temperatura y humedad en tiempo real</li>
-        <li>✔️ Facilidad de instalación y uso</li>
-    </ul>
-</section>
-
-
-    
-        <!-- Contacto -->
-        <section id="contact" class="contact">
-            <h2 class="section-title">Contacto</h2>
-            <p>Si tienes alguna pregunta o deseas más información, no dudes en contactarme.</p>
-            <ul>
-            <li>Email: Ecoairtesis@gmail.com</li>
-            <li>Teléfono: +54 9 3571-682610 </li>
-            <li>Teléfono: +54 9 3571-573339 </li>
-         </ul>
+        <section id="projects" class="projects">
+            <h2 class="section-title">Análisis de Mercado</h2>
+            <p>Estos son algunos gráficos o resultados de nuestro análisis:</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px;">
+                <div class="project-card">
+                    <img src="media/mercado1.png" alt="Gráfico de mercado 1">
+                    <p>Encuesta sobre si te gustaría tener nuestro producto.</p>
+                </div>
+                <div class="project-card">
+                    <img src="media/mercado2.png" alt="Gráfico de mercado 2">
+                    <p>Encuesta sobre los lugares donde usarían nuestro sistema.</p>
+                </div>
+                <div class="project-card">
+                    <img src="media/mercado3.png" alt="Gráfico de mercado 3">
+                    <p>Encuesta sobre cuánto estarían dispuestos a pagar.</p>
+                </div>
+            </div>
         </section>
     </div>
 
     <footer>
-        <p style="text-align:center; padding: 20px; background-color: #123458; color: white;">&copy; 2025 EcoAir Portfolio</p>
+        <p>&copy; 2025 EcoAir Portfolio</p>
     </footer>
-</div>
 
+    <script>
+        const showPromoBtn = document.getElementById('showPromotions');
+        const promoSection = document.getElementById('promoSection');
+
+        showPromoBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            promoSection.classList.toggle('active');
+            showPromoBtn.textContent = promoSection.classList.contains('active')
+                ? 'Ocultar Material Promocional'
+                : 'Ver Material Promocional';
+        });
+    </script>
 </body>
 </html>
